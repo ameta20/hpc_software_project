@@ -7,6 +7,7 @@ class OSUBenchmarkBase(rfm.RegressionTest):
     num_tasks = 2
     num_tasks_per_node = 2
     num_cpus_per_task = 1
+    build_system = 'EasyBuild'
     executable = 'osu_latency'  # Default, overridden in derived classes
     tags = {'performance', 'mpi', 'numa'}
 
@@ -19,6 +20,12 @@ class OSUBenchmarkBase(rfm.RegressionTest):
         elif system == 'iris':
             # Iris: 2 NUMA nodes per socket, bind to cores 0 and 14 (different NUMA)
             self.job.options = ['--ntasks-per-socket=1', '--cpu-bind=map_cpu:0,14']
+
+    @run_before('compile')
+    def setup_build_system(self):
+        self.build_system.easyconfigs = ['OSU-Micro-Benchmarks-7.2-gompi-2023.09.eb']
+
+
 
     @sanity_function
     def validate_results(self):

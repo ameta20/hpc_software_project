@@ -21,7 +21,7 @@ site_configuration = {
     'environments': [
         {
             'name': 'foss',
-            'modules': ['toolchain/foss/2023b','perf/OSU-Micro-Benchmarks/7.5-gompi-2023b'],
+            'modules': ['toolchain/foss/2023b'],
             'cc': 'mpicc',
             'cxx': 'mpicxx',
             'target_systems': ['aion']
