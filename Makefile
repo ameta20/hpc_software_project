@@ -1,4 +1,4 @@
-SRC_DIR := src
+SRC_DIR := osu_src
 OSU_VERSION := 7.5
 OSU_TARBALL := osu-micro-benchmarks-$(OSU_VERSION).tar.gz
 OSU_DIR := osu-micro-benchmarks-$(OSU_VERSION)
