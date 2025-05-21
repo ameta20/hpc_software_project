@@ -28,7 +28,7 @@ site_configuration = {
                     'descr': 'Iris compute nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['--partition=batch', '--qos=normal', '--cpus-per-task=1'],
+                    'access': ['--partition=batch', '--qos=normal'],
                     'max_jobs':  8,
                     'environs': ['foss', 'easybuild', 'eessi'],
                 }
