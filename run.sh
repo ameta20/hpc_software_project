@@ -17,4 +17,7 @@ echo "================================== DIFF_SOCKETS_BW =======================
 reframe -C config/ulhpc.py -c reframe_tests/osu_bw_diff_sockets.py -r
 echo "================================ DIFF_SOCKETS_LATENCY =================================="
 reframe -C config/ulhpc.py -c reframe_tests/osu_latency_diff_sockets.py -r
-
+echo "================================== DIFF_NODES_BW =================================="
+reframe -C config/ulhpc.py -c reframe_tests/osu_bw_diff_nodes.py -r
+echo "================================ DIFF_NODES_LATENCY =================================="
+reframe -C config/ulhpc.py -c reframe_tests/osu_latency_diff_nodes.py -r
