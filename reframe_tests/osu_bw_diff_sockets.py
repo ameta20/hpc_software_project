@@ -17,11 +17,12 @@ class OSUBandwidthDiffSockets(rfm.RunOnlyRegressionTest):
 
         self.descr = f'osu_bw ({env}) on same node, different sockets'
         self.executable_opts = ['-m', '1048576:1048576']
-        
+
         if env == 'foss':
             import os
             user_home = os.path.expanduser('~')  # Gets the user's home directory
             self.executable = os.path.join(user_home, 'hpc_software_project/osu_src/osu_bw')
+
         else:
             self.executable = 'osu_bw'  # Expected to be in $PATH for easybuild/eessi
 
