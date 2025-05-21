@@ -1,5 +1,6 @@
 import reframe as rfm
 import reframe.utility.sanity as sn
+import os # For path joining
 
 @rfm.simple_test
 class OSUBandwidthSameSocketDiffNUMA(rfm.RunOnlyRegressionTest):
@@ -25,7 +26,8 @@ class OSUBandwidthSameSocketDiffNUMA(rfm.RunOnlyRegressionTest):
         self.executable_opts = ['-m', '1048576:1048576'] 
 
         if env == 'foss':
-            self.executable = '/mnt/aiongpfs/users/ameta/hpc_software_project/osu_src/osu_bw'
+            user_home = os.path.expanduser('~')
+            self.executable = os.path.join(user_home, 'hpc_software_project/osu_src/osu_bw')
         else:
             self.executable = 'osu_bw'
 
