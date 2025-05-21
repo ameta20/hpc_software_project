@@ -13,6 +13,14 @@ else
 fi
 
 # Run Tests
+echo "================================== SAME_NUMA_BW =================================="
+reframe -C config/ulhpc.py -c reframe_tests/osu_bw_same_numa.py -r
+echo "================================ SAME_NUMA_LATENCY =================================="
+reframe -C config/ulhpc.py -c reframe_tests/osu_latency_same_numa.py -r
+echo "================================== DIFF_NUMA_BW =================================="
+reframe -C config/ulhpc.py -c reframe_tests/osu_bw_same_socket_diff_numa.py -r
+echo "================================ DIFF_NUMA_LATENCY =================================="
+reframe -C config/ulhpc.py -c reframe_tests/osu_latency_same_socket_diff_numa.py -r
 echo "================================== DIFF_SOCKETS_BW =================================="
 reframe -C config/ulhpc.py -c reframe_tests/osu_bw_diff_sockets.py -r
 echo "================================ DIFF_SOCKETS_LATENCY =================================="
