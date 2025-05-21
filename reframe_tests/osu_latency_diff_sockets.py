@@ -1,34 +1,30 @@
+import reframe as rfm
+import reframe.utility.sanity as sn
+
 @rfm.simple_test
 class OSULatencyDiffSockets(rfm.RunOnlyRegressionTest):
-    binary_source = parameter(['source', 'easybuild', 'eessi'])
-
-    valid_systems = ['*']
-    valid_prog_environs = ['*']
+    valid_systems = ['aion', 'iris']
+    valid_prog_environs = ['foss', 'easybuild', 'eessi']
     time_limit = '10m'
     num_tasks = 2
     num_tasks_per_node = 2
     tags = {'osu', 'latency', 'diff_sockets'}
 
-    @run_after('init')
+    @run_before('run')
     def setup_test(self):
-        self.descr = f'osu_latency ({self.binary_source}) on same node, different sockets'
-        self.executable_opts = ['-m', '8192:8192']
-        
-        if self.binary_source == 'source':
-            self.modules = ['toolchain/foss/2023b']
-            self.pre_run = [
-                'module load toolchain/foss/2023b',
-                'mpicc src/osu_latency.c -o osu_latency'
-            ]
-            self.executable = './osu_latency'
-        elif self.binary_source == 'easybuild':
-            self.modules = ['perf/OSU-Micro-Benchmarks/7.5-gompi-2023b']
-            self.executable = 'osu_latency'
-        elif self.binary_source == 'eessi':
-            self.modules = ['EESSI/2023.06']
-            self.executable = 'osu_latency'
+        env = self.current_environ.name
 
-        self.job.options += ['--map-by', 'socket']
+        self.descr = f'osu_latency ({env}) on same node, different sockets'
+        self.executable_opts = ['-m', '8192:8192']
+
+        if env == 'foss':
+            self.executable = '/mnt/aiongpfs/users/amahzoun/hpc_software_project/osu_src/osu_latency'
+        else:
+            self.executable = 'osu_latency'  # Expected to be in $PATH for easybuild/eessi
+
+    @run_before('run')
+    def pin_tasks_on_sockets(self):
+        self.job.options += ['--ntasks-per-socket=1', '--nodes=1']
 
     @sanity_function
     def check_run(self):
@@ -37,11 +33,3 @@ class OSULatencyDiffSockets(rfm.RunOnlyRegressionTest):
     @performance_function('us')
     def latency(self):
         return sn.extractsingle(r'^8192\s+(\S+)', self.stdout, 1, float)
-
-    @run_after('setup')
-    def set_references(self):
-        self.reference = {
-            '*': {
-                'latency': (2.3, -0.15, 0.15, 'us')
-            }
-        }

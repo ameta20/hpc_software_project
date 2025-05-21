@@ -4,7 +4,7 @@ import reframe.utility.sanity as sn
 
 @rfm.simple_test
 class OSUBandwidthDiffSockets(rfm.RunOnlyRegressionTest):
-    valid_systems = ['*']
+    valid_systems = ['aion', 'iris']
     valid_prog_environs = ['foss', 'easybuild', 'eessi']
     time_limit = '10m'
     num_tasks = 2
@@ -35,10 +35,3 @@ class OSUBandwidthDiffSockets(rfm.RunOnlyRegressionTest):
     def bandwidth(self):
         return sn.extractsingle(r'^1048576\s+(\S+)', self.stdout, 1, float)
 
-#    @run_after('setup')
-#    def set_references(self):
-#        self.reference = {
-#            '*': {
-#                'bandwidth': (12000, -0.10, 0.10, 'MB/s')
-#            }
-#        }
