@@ -10,11 +10,11 @@
 
 
 ### Files Structure
--- config
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- ulhpc.py
--- Makefile
--- README.md
--- reframe_tests
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- osu_bw_diff_nodes.py
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- [Other tests]...
--- run.sh
+-- config  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- ulhpc.py  
+-- Makefile  
+-- README.md  
+-- reframe_tests  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- osu_bw_diff_nodes.py  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- [Other tests]...  
+-- run.sh  
