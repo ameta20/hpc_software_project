@@ -16,9 +16,11 @@ class OSULatencyDiffSockets(rfm.RunOnlyRegressionTest):
 
         self.descr = f'osu_latency ({env}) on same node, different sockets'
         self.executable_opts = ['-m', '8192:8192']
-
+        
         if env == 'foss':
-            self.executable = '/mnt/aiongpfs/users/amahzoun/hpc_software_project/osu_src/osu_latency'
+            import os
+            user_home = os.path.expanduser('~')  # Gets the user's home directory
+            self.executable = os.path.join(user_home, 'hpc_software_project/osu_src/osu_latency')
         else:
             self.executable = 'osu_latency'  # Expected to be in $PATH for easybuild/eessi
 
