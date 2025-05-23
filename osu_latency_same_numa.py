@@ -2,7 +2,7 @@ import reframe as rfm
 import reframe.utility.sanity as sn
 
 @rfm.simple_test
-class OSULatencySameNode(rfm.RunOnlyRegressionTest):
+class OSULatencySameNUMA(rfm.RunOnlyRegressionTest):
     valid_systems = ['aion', 'iris']
     valid_prog_environs = ['foss', 'easybuild', 'eessi']
     time_limit = '10m'
@@ -11,7 +11,7 @@ class OSULatencySameNode(rfm.RunOnlyRegressionTest):
 
     cpu_cores_to_pin = "0,2"
 
-    tags = {'osu', 'latency', 'same_node'}
+    tags = {'osu', 'latency', 'same_numa'}
 
     @run_before('run')
     def setup_test(self):
@@ -24,7 +24,7 @@ class OSULatencySameNode(rfm.RunOnlyRegressionTest):
             import os
             user_home = os.path.expanduser('~')  # Gets the user's home directory
             self.executable = os.path.join(user_home, 'hpc_software_project/osu_src/osu_latency')
-        
+
         else:
             self.executable = 'osu_latency'  # Expected to be in $PATH for easybuild/eessi
 

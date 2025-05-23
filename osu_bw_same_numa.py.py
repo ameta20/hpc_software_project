@@ -1,9 +1,8 @@
 import reframe as rfm
 import reframe.utility.sanity as sn
-import subprocess
 
 @rfm.simple_test
-class OSUBandwidthSameNUMAAuto(rfm.RunOnlyRegressionTest):
+class OSUBandwidthSameNUMA(rfm.RunOnlyRegressionTest):
     valid_systems = ['aion', 'iris']
     valid_prog_environs = ['foss', 'easybuild', 'eessi']
     time_limit = '10m'
@@ -20,7 +19,7 @@ class OSUBandwidthSameNUMAAuto(rfm.RunOnlyRegressionTest):
         if env == 'foss':
             import os
             user_home = os.path.expanduser('~')  # Gets the user's home directory
-            self.executable = os.path.join(user_home, 'hpc_software_project/osu_src/osu_bw')    
+            self.executable = os.path.join(user_home, 'hpc_software_project/osu_src/osu_bw')
         else:
             self.executable = 'osu_bw'
 
@@ -38,4 +37,3 @@ class OSUBandwidthSameNUMAAuto(rfm.RunOnlyRegressionTest):
     @performance_function('MB/s')
     def bandwidth(self):
         return sn.extractsingle(r'^1048576\s+(\S+)', self.stdout, 1, float)
-
